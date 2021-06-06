@@ -20,6 +20,9 @@ public class ConditionController {
     @RequestMapping(value = "/condition/{zipcode}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public Condition getConditionsById(@PathVariable int zipcode) {
+        if(Integer.toString(zipcode).length() !=5) {
+            throw new IllegalArgumentException("Zipcode must be exactly 5 digits");
+        }
         Condition foundCondition = null;
         System.out.println("hello!");
         for(Condition condition : conditionList) {
